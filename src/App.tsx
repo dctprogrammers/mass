@@ -1,24 +1,34 @@
-import type { Component } from "solid-js";
+import { Component, lazy } from "solid-js";
 import { hashIntegration, Route, Router, Routes } from "solid-app-router";
 import Navbar from "./components/Navbar";
 import About from "./pages/About";
 import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import RequestIndex from "./pages/Request";
+import { fetchSelectedRequest } from "./data-functions/fetch-selected-request";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+const RequestById = lazy(() => import("./pages/Request/[id]"));
 
 const App: Component = () => {
   return (
     <Router source={hashIntegration()}>
       <div class="flex flex-col h-full min-h-screen">
         <Navbar />
-        <main class="px-8 py-4 flex-1 flex flex-col h-full">
+        <main class="flex-1 flex flex-col h-full">
           <Routes>
             <Route path="/about" element={<About />} />
-            <Route path="/" element={<Home />} />
-            {/* <Route path="/" element={<RestClientIndex />} />
-            <Route
-              path="/:id"
-              element={<RestClient />}
-              data={fetchSelectedRequest}
-            /> */}
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/" element={<Dashboard />} />
+            {/* <Route path="/" element={<Home />}>
+              <Route path="/" element={<RequestIndex />} />
+              <Route
+                path="/:id"
+                element={<RequestById />}
+                data={fetchSelectedRequest}
+              />
+            </Route> */}
           </Routes>
         </main>
       </div>

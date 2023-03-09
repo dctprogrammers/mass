@@ -1,33 +1,95 @@
 import { Component, createSignal, For } from "solid-js";
-import { Link, Outlet } from "solid-app-router";
-import { restRequests } from "../store";
+import { Link, Outlet, useLocation, useNavigate } from "solid-app-router";
+// import { IRestRequest } from "../interfaces/rest.interfaces";
+import { restRequests, setRestRequests } from "../store";
 import RequestModal from "../components/RequestModal";
+import IconButton from "../components/IconButton";
+
+import "./Home.css";
 
 const Home: Component = () => {
   const [showModal, setShowModal] = createSignal(false);
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // const requests: IRestRequest[] = [
+  //   {
+  //     id: "1",
+  //     name: "Get Scores",
+  //     description: "Getting scores from server",
+  //     request: {
+  //       method: "GET",
+  //       url: "https://scorer-pro3.p.rapidapi.com/score/game123",
+  //       headers: [
+  //         {
+  //           key: "X-RapidAPI-Host",
+  //           value: "API_HOST_FROM_RAPID_API",
+  //         },
+  //         {
+  //           key: "X-RapidAPI-Key",
+  //           value: "API_KEY_FROM_RAPID_API",
+  //         },
+  //       ],
+  //     },
+  //   },
+  //   {
+  //     id: "2",
+  //     name: "Add Score",
+  //     description: "Adding scores to server",
+  //     request: {
+  //       method: "POST",
+  //       url: "https://scorer-pro3.p.rapidapi.com/score",
+  //       headers: [
+  //         {
+  //           key: "X-RapidAPI-Host",
+  //           value: "API_HOST_FROM_RAPID_API",
+  //         },
+  //         {
+  //           key: "X-RapidAPI-Key",
+  //           value: "API_KEY_FROM_RAPID_API",
+  //         },
+  //       ],
+  //       body: JSON.stringify({
+  //         score: 100,
+  //         gameId: "123",
+  //         userId: "test123",
+  //       }),
+  //     },
+  //   },
+  // ];
+
   return (
     <div class="flex flex-col md:flex-row gap-4 h-full flex-1">
-      <div onclick={() => setShowModal(!showModal())}>
-        <RequestModal
-          show={showModal()}
-          onModalHide={(id: string | null) => {
-            setShowModal(!showModal());
-          }}
-        />
-      </div>
+      <RequestModal
+        show={showModal()}
+        onModalHide={(id: string | null) => {
+          setShowModal(!showModal());
+          if (id) navigate(`/${id}`);
+        }}
+      />
       <div class="w-full md:w-1/4 bg-gray-200 min-h-full border-gray-300 border p-4 rounded-lg">
         <div class="flex justify-between py-4">
           <h1 class="text-sm">Rest Requests</h1>
-          <button
-            onclick={() => setShowModal(true)}
-            class="flex hover:bg-opacity-60 justify-center items-center"
-          >
-            <div>+</div>
-          </button>
+          <IconButton
+            onClick={() => setShowModal(true)}
+            icon="add"
+            label="Add Request"
+          />
         </div>
         <div class="list">
-          <For each={restRequests()} fallback={<div>Loading ...</div>}>
+          {/* <For each={requests} fallback={<div>Loading ...</div>}> */}
+          <For
+            each={restRequests()}
+            fallback={
+              <button
+                onClick={() => setShowModal(true)}
+                class="cursor-pointer hover:bg-red-600 hover:text-white flex justify-between gap p-2 bg-white border rounded-md items-center w-full"
+              >
+                <p class="text-center w-full">No Requests. Click to add</p>
+              </button>
+            }
+          >
             {(item) => (
               <Link href={`/${item.id}`} class="relative list__item">
                 <div
@@ -43,6 +105,21 @@ const Home: Component = () => {
                     {item.request.method} {item.request.url}
                   </div>
                 </div>
+                <ion-icon
+                  onclick={(e: MouseEvent) => {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    if (restRequests()?.length) {
+                      const requests = restRequests() || [];
+                      setRestRequests(requests.filter((i) => i.id !== item.id));
+                      if (location.pathname === `/${item.id}`) {
+                        navigate("/");
+                      }
+                    }
+                  }}
+                  class="absolute text-xl hover:scale-125 transition-all ease-in-out duration-100 hover:text-red-700 text-red-600 right-2 top-0 bottom-0 m-auto"
+                  name="trash"
+                ></ion-icon>
               </Link>
             )}
           </For>
