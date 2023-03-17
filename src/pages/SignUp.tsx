@@ -6,7 +6,7 @@ const SignUp: Component = () => {
     <>
       <Navbar />
       <div class="flex flex-col items-center justify-center py-8 mx-auto lg:py-0 my-auto">
-        <div class="bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <div class="w-[320px] bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 class="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Create your account
@@ -62,15 +62,15 @@ const SignUp: Component = () => {
               </div>
               <button
                 type="submit"
-                class="w-full text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-primary-800"
+                class="w-full text-white bg-primary-red hover:bg-primary-red focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-red dark:hover:bg-primary-red dark:focus:ring-primary-800"
               >
                 Sign Up
               </button>
-              <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+              <p class="text-sm font-light text-gray-500 dark:text-gray-200">
                 Already have account?{" "}
                 <a
                   href="/signin"
-                  class="font-medium text-red-600 hover:underline dark:text-primary-500"
+                  class="font-medium text-primary-red hover:underline dark:text-primary-500"
                 >
                   Sign in
                 </a>

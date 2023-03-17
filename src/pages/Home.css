@@ -11,5 +11,5 @@
 }
 
 .list .list__item--active {
-  @apply bg-red-600 text-white;
+  @apply bg-primary-red text-white;
 }

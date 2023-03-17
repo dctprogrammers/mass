@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard";
 // import { fetchSelectedRequest } from "./data-functions/fetch-selected-request";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import Footer from "./components/Footer";
 const RequestById = lazy(() => import("./pages/Request/[id]"));
 
 const App: Component = () => {
@@ -29,6 +30,7 @@ const App: Component = () => {
             </Route> */}
             <Route path="*" element={() => <div>Page Not Found!!!</div>} />
           </Routes>
+          <Footer />
         </main>
       </div>
     </Router>
