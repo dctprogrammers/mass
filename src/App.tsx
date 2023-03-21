@@ -1,4 +1,4 @@
-import { Component, lazy } from "solid-js";
+import { Component, createEffect, lazy } from "solid-js";
 import { hashIntegration, Route, Router, Routes } from "solid-app-router";
 import About from "./pages/About";
 import Home from "./pages/Home";
@@ -11,10 +11,23 @@ import Footer from "./components/Footer";
 const RequestById = lazy(() => import("./pages/Request/[id]"));
 
 const App: Component = () => {
+  createEffect(() => {
+    if (localStorage.getItem("theme") === null) {
+      localStorage.setItem("theme", "light");
+    }
+
+    const use = async () => {
+      (await import("tw-elements")).default;
+    };
+
+    use();
+  });
+
   return (
+    // <Router>
     <Router source={hashIntegration()}>
       <div class="flex flex-col h-full min-h-screen">
-        <main class="flex-1 flex flex-col h-full">
+        <main class="flex-1 flex flex-col h-full bg-neutral-100 dark:bg-neutral-700">
           <Routes>
             <Route path="/about" element={<About />} />
             <Route path="/signin" element={<SignIn />} />

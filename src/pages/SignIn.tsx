@@ -122,7 +122,7 @@ const SignIn: Component = () => {
               <button
                 onClick={handleLogin}
                 disabled={loading()}
-                class="w-full text-white bg-primary-red hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-red dark:hover:bg-red-700 dark:focus:ring-primary-800"
+                class="w-full text-white bg-rojo hover:bg-turkey_red focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-red dark:hover:bg-red-700 dark:focus:ring-primary-800"
               >
                 Sign in
               </button>
@@ -130,7 +130,7 @@ const SignIn: Component = () => {
                 Don’t have an account yet?{" "}
                 <a
                   href="/signup"
-                  class="font-medium text-primary-red hover:underline"
+                  class="font-medium text-rojo hover:text-turkey_red hover:underline"
                 >
                   Sign up
                 </a>

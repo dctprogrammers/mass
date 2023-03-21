@@ -1,4 +1,4 @@
-.list .list__item ion-icon {
+/* .list .list__item ion-icon {
   display: none;
 }
 
@@ -11,5 +11,5 @@
 }
 
 .list .list__item--active {
-  @apply bg-primary-red text-white;
-}
+  @apply bg-rojo text-white;
+} */
