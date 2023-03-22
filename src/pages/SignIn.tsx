@@ -27,9 +27,10 @@ const SignIn: Component = () => {
           }
         )
         .then(function (response) {
-          // console.log(response.data);
+          console.log(response.data);
 
           sessionStorage.setItem("token", response.data.access_token);
+          sessionStorage.setItem("name", response.data.name);
           navigate("/dashboard", { replace: true });
         })
         .catch(function (error) {

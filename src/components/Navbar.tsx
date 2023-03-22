@@ -138,6 +138,11 @@ const Navbar: Component = () => {
             aria-labelledby="dropdownMenuButton2"
             data-te-dropdown-menu-ref
           >
+            <h6 class="block w-full whitespace-nowrap bg-transparent py-2 px-6 text-sm font-semibold text-neutral-500 dark:text-neutral-200">
+              {sessionStorage.hasOwnProperty("name") &&
+                sessionStorage.getItem("name")}
+            </h6>
+            <hr class="h-0 border border-t-0 border-solid border-neutral-700 opacity-25 dark:border-neutral-200" />
             <li>
               <a
                 class="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
@@ -149,7 +154,8 @@ const Navbar: Component = () => {
             </li>
             <li>
               <a
-                class="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                class="pointer-events-none block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-400 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-500 dark:hover:bg-neutral-600"
+                // class="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
                 href="#"
                 data-te-dropdown-item-ref
               >
@@ -219,7 +225,7 @@ const Navbar: Component = () => {
 
   const guestLinks = (
     <ul
-      class="list-style-none mr-auto flex flex-col pl-0 md:flex-row"
+      class="list-style-none flex flex-col pl-0 md:flex-row"
       data-te-navbar-nav-ref
     >
       {/* <li class="md:pr-2" data-te-nav-item-ref>
@@ -284,7 +290,7 @@ const Navbar: Component = () => {
           </button>
         </div> */}
         <div
-          class="flex-grow items-center"
+          class="items-center"
           // class="!visible hidden flex-grow basis-[100%] items-center md:!flex md:basis-auto"
           id="navbarSupportedContent1"
           data-te-collapse-item
