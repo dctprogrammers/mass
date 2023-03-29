@@ -1,5 +1,5 @@
 import { Component, createEffect } from "solid-js";
-import { Outlet, useNavigate } from "solid-app-router";
+import { useNavigate } from "solid-app-router";
 // import { IRestRequest } from "../interfaces/rest.interfaces";
 // import { restRequests, setRestRequests } from "../store";
 // import RequestModal from "../components/RequestModal";
@@ -7,6 +7,7 @@ import { Outlet, useNavigate } from "solid-app-router";
 
 import "./Home.css";
 import Navbar from "../components/Navbar";
+import Sidenav from "../components/Sidenav";
 
 const Home: Component = () => {
   // const location = useLocation();
@@ -70,7 +71,8 @@ const Home: Component = () => {
   return (
     <div>
       <Navbar />
-      <Outlet />
+      <Sidenav />
+      {/* <div class="pt-[65px] ml-64 bg-gray-50 h-screen">Home</div> */}
     </div>
     // <div class="flex flex-col md:flex-row gap-4 h-full flex-1">
     //   <RequestModal

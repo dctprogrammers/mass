@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "solid-app-router";
 import { Component, createSignal, createEffect } from "solid-js";
+import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
 const SignIn: Component = () => {
@@ -51,7 +52,7 @@ const SignIn: Component = () => {
   return (
     <>
       <Navbar />
-      <div class="flex flex-col items-center justify-center py-8 mx-auto lg:py-0 my-auto">
+      <div class="h-[90vh] flex flex-col items-center justify-center py-8 mx-auto lg:py-0 my-auto">
         <div class="w-[320px] bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 class="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -140,6 +141,7 @@ const SignIn: Component = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
