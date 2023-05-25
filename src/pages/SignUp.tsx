@@ -7,9 +7,9 @@ const SignUp: Component = () => {
     <>
       <Navbar />
       <div class="h-[90vh] flex flex-col items-center justify-center py-8 mx-auto lg:py-0 my-auto">
-        <div class="w-[320px] bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <div class="w-[320px] bg-white rounded-lg shadow border-2 md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 class="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+            <h1 class="text-center text-xl font-bold leading-tight tracking-tight text-gray-700 md:text-2xl dark:text-white">
               Create your account
             </h1>
             <form class="space-y-4 md:space-y-6" action="#">
@@ -67,7 +67,7 @@ const SignUp: Component = () => {
               >
                 Sign Up
               </button>
-              <p class="text-sm font-light text-gray-500 dark:text-gray-200">
+              <p class="text-sm font-light text-gray-500 dark:text-white">
                 Already have account?{" "}
                 <a
                   href="/signin"

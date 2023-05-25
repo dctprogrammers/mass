@@ -2,7 +2,7 @@ import { Component } from "solid-js";
 
 const Footer: Component = () => {
   return (
-    <footer class="bg-neutral-200 text-center text-neutral-600 text-sm dark:bg-gray-800 dark:text-neutral-200">
+    <footer class="z-[1050] relative bg-gray-50 text-center text-neutral-600 text-sm dark:bg-gray-900 dark:text-neutral-200">
       <div class="flex items-center justify-center border-y-2 border-neutral-300 p-4 dark:border-neutral-500">
         <div class="mr-6 hidden md:block">
           <span>Get connected with us on social networks:</span>
@@ -14,7 +14,7 @@ const Footer: Component = () => {
             target="_blank"
           >
             <svg
-              class="h-8 w-8 text-neutral-600 hover:text-rojo hover:stroke-2 dark:text-neutral-200 dark:hover:text-primary-red"
+              class="h-8 w-8 text-neutral-600 hover:text-rojo hover:stroke-2 dark:text-neutral-200 dark:hover:text-rojo"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -32,7 +32,7 @@ const Footer: Component = () => {
             target="_blank"
           >
             <svg
-              class="h-8 w-8 text-neutral-600 hover:text-rojo hover:stroke-2 dark:text-neutral-200 dark:hover:text-primary-red"
+              class="h-8 w-8 text-neutral-600 hover:text-rojo hover:stroke-2 dark:text-neutral-200 dark:hover:text-rojo"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -52,7 +52,7 @@ const Footer: Component = () => {
             target="_blank"
           >
             <svg
-              class="h-8 w-8 text-neutral-600 hover:text-rojo hover:stroke-2 dark:text-neutral-200 dark:hover:text-primary-red"
+              class="h-8 w-8 text-neutral-600 hover:text-rojo hover:stroke-2 dark:text-neutral-200 dark:hover:text-rojo"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -187,7 +187,7 @@ const Footer: Component = () => {
       <div class="p-2 text-center">
         <span>© 2023 Copyright: </span>
         <a
-          class="font-semibold text-neutral-600 hover:text-rojo dark:text-neutral-400 dark:hover:text-primary-red"
+          class="font-semibold text-neutral-600 hover:text-rojo dark:text-neutral-400 dark:hover:text-rojo"
           href="https://www.dctcleaning.cz/"
         >
           DCT Czech s.r.o.

@@ -1,16 +1,12 @@
 import { Component, createEffect } from "solid-js";
-import { useNavigate } from "solid-app-router";
-// import { IRestRequest } from "../interfaces/rest.interfaces";
-// import { restRequests, setRestRequests } from "../store";
-// import RequestModal from "../components/RequestModal";
-// import IconButton from "../components/IconButton";
+// import { useNavigate } from "solid-app-router";
 
 import "./Home.css";
 import Navbar from "../components/Navbar";
 import Sidenav from "../components/Sidenav";
+import { useNavigate } from "@solidjs/router";
 
 const Home: Component = () => {
-  // const location = useLocation();
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
 
@@ -18,62 +14,21 @@ const Home: Component = () => {
     if (!token) {
       navigate("/signin", { replace: true });
     }
+
+    // if (token) {
+    //   navigate("/dashboard", { replace: true });
+    // }
   });
-
-  // const [showModal, setShowModal] = createSignal(false);
-
-  // const requests: IRestRequest[] = [
-  //   {
-  //     id: "1",
-  //     name: "Get Scores",
-  //     description: "Getting scores from server",
-  //     request: {
-  //       method: "GET",
-  //       url: "https://scorer-pro3.p.rapidapi.com/score/game123",
-  //       headers: [
-  //         {
-  //           key: "X-RapidAPI-Host",
-  //           value: "API_HOST_FROM_RAPID_API",
-  //         },
-  //         {
-  //           key: "X-RapidAPI-Key",
-  //           value: "API_KEY_FROM_RAPID_API",
-  //         },
-  //       ],
-  //     },
-  //   },
-  //   {
-  //     id: "2",
-  //     name: "Add Score",
-  //     description: "Adding scores to server",
-  //     request: {
-  //       method: "POST",
-  //       url: "https://scorer-pro3.p.rapidapi.com/score",
-  //       headers: [
-  //         {
-  //           key: "X-RapidAPI-Host",
-  //           value: "API_HOST_FROM_RAPID_API",
-  //         },
-  //         {
-  //           key: "X-RapidAPI-Key",
-  //           value: "API_KEY_FROM_RAPID_API",
-  //         },
-  //       ],
-  //       body: JSON.stringify({
-  //         score: 100,
-  //         gameId: "123",
-  //         userId: "test123",
-  //       }),
-  //     },
-  //   },
-  // ];
 
   return (
     <div>
       <Navbar />
       <Sidenav />
+      {/* <Outlet /> */}
       {/* <div class="pt-[65px] ml-64 bg-gray-50 h-screen">Home</div> */}
+      {/* <Footer /> */}
     </div>
+
     // <div class="flex flex-col md:flex-row gap-4 h-full flex-1">
     //   <RequestModal
     //     show={showModal()}
@@ -139,9 +94,10 @@ const Home: Component = () => {
     //       </For>
     //     </div>
     //   </div>
-    //   <div class="flex-1 min-h-full">
-    //     <Outlet />
-    //   </div>
+    // <div class="flex-1 min-h-full">
+    //   <Outlet />
+    //   <div>Hello</div>
+    // </div>
     // </div>
   );
 };

@@ -1,33 +1,24 @@
-import { useNavigate } from "solid-app-router";
-import { Component } from "solid-js";
+import { useNavigate } from "@solidjs/router";
+// import { useNavigate } from "solid-app-router";
+import { Component, createEffect } from "solid-js";
 
 const Navbar: Component = () => {
-  const html = document.querySelector("html");
-
-  const toggleLightMode = () => {
-    html?.classList.add("light");
-    html?.classList.remove("dark");
-
-    localStorage.setItem("theme", "light");
-  };
-
-  const toggleDarkMode = () => {
-    html?.classList.add("dark");
-    html?.classList.remove("light");
-
-    localStorage.setItem("theme", "dark");
-  };
-
   const navigate = useNavigate();
 
-  // createEffect(() => {
-  //   if (localStorage.getItem("theme") === null) {
-  //     localStorage.setItem("theme", "dark");
-  //   }
-  // });
+  createEffect(() => {
+    if (localStorage.getItem("theme") === "dark") {
+      document
+        .getElementById("theme-toggle-dark-icon")
+        ?.classList.add("hidden");
+      document
+        .getElementById("theme-toggle-light-icon")
+        ?.classList.remove("hidden");
+    }
+  });
 
   const logOut = () => {
     sessionStorage.removeItem("token");
+    sessionStorage.removeItem("name");
     navigate("/signin", { replace: true });
   };
 
@@ -37,7 +28,7 @@ const Navbar: Component = () => {
       <div class="relative" data-te-dropdown-ref>
         <button
           // class="hidden-arrow mr-4 flex items-center text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-          class="mr-1 flex items-center rounded-lg p-2 text-gray-500 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-900 disabled:text-black/30 [&.active]:text-black/90 dark:hover:bg-neutral-700 dark:focus:text-neutral-300 dark:[&.active]:text-neutral-400"
+          class="mr-1 flex items-center rounded-lg p-1.5 text-gray-500 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-900  disabled:text-black/30 [&.active]:text-black/90 dark:text-white dark:hover:bg-gray-600 dark:focus:text-gray-300 dark:[&.active]:text-neutral-400"
           // href="#"
           type="button"
           id="dropdownMenuButton1"
@@ -204,45 +195,12 @@ const Navbar: Component = () => {
       </div>
       {/* End Notifications */}
       {/* Theme Mode */}
-      <div
-        class=" text-sm font-medium relative before:z-10 before:absolute before:left-1/2 before:-bottom-3 before:w-max before:max-w-xs before:-translate-x-1/2 before:translate-y-full before:rounded-lg before:bg-gray-900 before:px-3 before:py-2 before:text-white before:invisible before:content-[attr(data-tip)] after:z-10 after:absolute after:left-1/2 after:-bottom-3 after:h-0 after:w-0 after:-translate-x-1/2 after:border-8 after:border-b-gray-900 after:border-l-transparent after:border-t-transparent after:border-r-transparent after:invisible hover:before:visible hover:after:visible"
-        data-tip="Toggle dark mode"
-      >
-        <button
-          type="button"
-          class="mr-1 rounded-lg p-2.5 text-gray-500 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-900  disabled:text-black/30 [&.active]:text-black/90 dark:hover:bg-neutral-700 dark:focus:text-neutral-300 dark:[&.active]:text-neutral-400"
-          data-te-ripple-init
-          data-te-ripple-color="light"
-        >
-          <svg
-            id="theme-toggle-dark-icon"
-            class="h-5 w-5"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-          </svg>
-          <svg
-            id="theme-toggle-light-icon"
-            class="h-5 w-5 hidden"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
-        </button>
-      </div>
+      <ThemeButton />
       {/* End Theme Mode */}
       {/* Avatar */}
       <div class="relative p-1" data-te-dropdown-ref>
         <a
-          class="hidden-arrow flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none rounded-lg bg-neutral-50"
+          class="hidden-arrow ml-1 flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none rounded-lg bg-neutral-50"
           href="#"
           id="dropdownMenuButton2"
           role="button"
@@ -346,42 +304,47 @@ const Navbar: Component = () => {
   );
 
   const guestLinks = (
-    <ul
-      class="list-style-none flex flex-col pl-0 md:flex-row"
-      data-te-navbar-nav-ref
-    >
-      {/* <li class="md:pr-2" data-te-nav-item-ref>
-        <a
-          class="text-neutral-50 hover:text-neutral-300 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 md:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
-          href="/about"
-          data-te-nav-link-ref
-        >
-          About
-        </a>
-      </li> */}
-      {/* <li class="md:pr-2" data-te-nav-item-ref>
-        <a
-          class="text-white hover:text-neutral-300 focus:text-neutral-900 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 md:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-          href="signin"
-          data-te-nav-link-ref
-        >
-          Sign In
-        </a>
-      </li> */}
-    </ul>
-    // <div class="flex items-center gap-4">
-    //   <NavLink class="hover:opacity-50" href="/about">
-    //     About
-    //   </NavLink>
-    //   <NavLink class="hover:opacity-50" href="/signin">
-    //     Sign In
-    //   </NavLink>
-    // </div>
+    <>
+      {/* Theme Mode */}
+      <ThemeButton />
+      {/* End Theme Mode */}
+    </>
+    // <ul
+    //   class="list-style-none flex flex-col pl-0 md:flex-row"
+    //   data-te-navbar-nav-ref
+    // >
+    //   {/* <li class="md:pr-2" data-te-nav-item-ref>
+    //     <a
+    //       class="text-neutral-50 hover:text-neutral-300 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 md:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
+    //       href="/about"
+    //       data-te-nav-link-ref
+    //     >
+    //       About
+    //     </a>
+    //   </li> */}
+    //   {/* <li class="md:pr-2" data-te-nav-item-ref>
+    //     <a
+    //       class="text-white hover:text-neutral-300 focus:text-neutral-900 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 md:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+    //       href="signin"
+    //       data-te-nav-link-ref
+    //     >
+    //       Sign In
+    //     </a>
+    //   </li> */}
+    // </ul>
+    // // <div class="flex items-center gap-4">
+    // //   <NavLink class="hover:opacity-50" href="/about">
+    // //     About
+    // //   </NavLink>
+    // //   <NavLink class="hover:opacity-50" href="/signin">
+    // //     Sign In
+    // //   </NavLink>
+    // // </div>
   );
 
   return (
     <nav
-      class="z-50 fixed w-full bg-white border-b border-gray-200 dark:bg-gray-800"
+      class="fixed w-full z-[1050] bg-white border-b-2 border-gray-200 dark:bg-gray-800 dark:border-neutral-500"
       // class="z-50 fixed flex-no-wrap flex w-full items-center justify-between bg-white border-b border-neutral-200 dark:bg-gray-800 lg:flex-wrap lg:justify-start"
       data-te-navbar-ref
     >
@@ -389,7 +352,7 @@ const Navbar: Component = () => {
         {/* <div class="flex w-full flex-wrap items-center justify-between p-3"> */}
         <div class="flex items-center justify-start">
           <button
-            class="mr-3 inline-block rounded-lg p-2 text-gray-600 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-900 disabled:text-black/30 [&.active]:text-black/90 dark:hover:bg-gray-700 dark:focus:text-gray-300 dark:[&.active]:text-gray-400"
+            class="mr-3 inline-block rounded-lg p-2 text-gray-500 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-900 disabled:text-black/30 [&.active]:text-black/90 dark:text-white dark:hover:bg-gray-600 dark:focus:text-gray-300 dark:[&.active]:text-gray-400"
             // aria-haspopup="true"
             aria-expanded="true"
             id="slim-toggler"
@@ -451,7 +414,9 @@ const Navbar: Component = () => {
                 class="mr-3 h-8"
                 alt="DCT MASS Logo"
               />
-              <span class="text-2xl font-semibold">MASS</span>
+              <span class="text-2xl font-semibold text-gray-700 hover:text-gray-900 dark:text-white">
+                MASS
+              </span>
             </a>
           ) : (
             <a
@@ -465,7 +430,9 @@ const Navbar: Component = () => {
                 class="mr-3 h-8"
                 alt="DCT MASS Logo"
               />
-              <span class="text-2xl font-semibold">MASS</span>
+              <span class="text-2xl font-semibold text-gray-700 hover:text-gray-900 dark:text-white">
+                MASS
+              </span>
             </a>
           )}
           {/* <div
@@ -503,6 +470,77 @@ const Navbar: Component = () => {
         {sessionStorage.getItem("token") ? authLinks : guestLinks}
       </div>
     </nav>
+  );
+};
+
+const ThemeButton = () => {
+  const html = document.querySelector("html");
+
+  const toggleTheme = () => {
+    if (localStorage.getItem("theme") === "light") {
+      html?.classList.add("dark");
+      html?.classList.remove("light");
+
+      document
+        .getElementById("theme-toggle-dark-icon")
+        ?.classList.add("hidden");
+      document
+        .getElementById("theme-toggle-light-icon")
+        ?.classList.remove("hidden");
+
+      localStorage.setItem("theme", "dark");
+    } else {
+      html?.classList.add("light");
+      html?.classList.remove("dark");
+
+      document
+        .getElementById("theme-toggle-dark-icon")
+        ?.classList.remove("hidden");
+      document
+        .getElementById("theme-toggle-light-icon")
+        ?.classList.add("hidden");
+
+      localStorage.setItem("theme", "light");
+    }
+  };
+
+  return (
+    <div
+      id="theme"
+      class="text-sm font-medium relative before:z-10 before:absolute before:left-1/2 before:-bottom-3 before:w-max before:max-w-xs before:-translate-x-1/2 before:translate-y-full before:rounded-lg before:bg-gray-900 before:px-3 before:py-2 before:text-white before:invisible before:content-[attr(data-tip)] after:z-10 after:absolute after:left-1/2 after:-bottom-3 after:h-0 after:w-0 after:-translate-x-1/2 after:border-8 after:border-b-gray-900 after:border-l-transparent after:border-t-transparent after:border-r-transparent after:invisible hover:before:visible hover:after:visible"
+      data-tip="Toggle theme"
+    >
+      <button
+        type="button"
+        class="rounded-lg p-2.5 text-gray-500 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-900  disabled:text-black/30 [&.active]:text-black/90 dark:text-white dark:hover:bg-gray-600 dark:focus:text-gray-300 dark:[&.active]:text-neutral-400"
+        data-te-ripple-init
+        data-te-ripple-color="light"
+        onClick={toggleTheme}
+      >
+        <svg
+          id="theme-toggle-dark-icon"
+          class="h-5 w-5"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+        </svg>
+        <svg
+          id="theme-toggle-light-icon"
+          class="h-5 w-5 hidden"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </button>
+    </div>
   );
 };
 
